@@ -12,9 +12,10 @@ ARCHITECTURE ctrl OF controle IS
    ------------------------------------------------------------------
    -- definição dos estados (Moore)
    ------------------------------------------------------------------
-   TYPE Estado IS (ZERA, CARREGA, SALVA, RESULT);
-   SIGNAL estado : Estado;
-   SIGNAL S      : STD_LOGIC_VECTOR(2 DOWNTO 0);  -- {C,L,T}
+   TYPE TipoEstado IS (ZERA, CARREGA, SALVA, RESULT);  -- nome trocado
+   SIGNAL estado : TipoEstado;                         -- sinal mantém “estado”
+
+   SIGNAL S : STD_LOGIC_VECTOR(2 DOWNTO 0);  -- {C,L,T}
 BEGIN
    ------------------------------------------------------------------
    -- Função F – transição de estados
@@ -53,7 +54,7 @@ BEGIN
    END PROCESS;
 
    ------------------------------------------------------------------
-   -- Função G – saídas (depende só do estado)
+   -- Função G – saídas
    ------------------------------------------------------------------
    WITH estado SELECT
       S <= "000" WHEN ZERA,       -- C=0 L=0 T=0
